@@ -126,6 +126,11 @@ func (b *Bucket) GetReader(path string, c *Config) (r io.ReadCloser, h http.Head
 	if err != nil {
 		return nil, nil, err
 	}
+	
+	if len(u.Path) > 0 && u.Path[0] == "/"[0] { // If path started as /, we actually need // .
+		u.Path = "/" + u.Path
+	}
+	
 	return newGetter(*u, c, b)
 }
 
