@@ -38,6 +38,8 @@ func (s *S3) Region() string {
 			panic("can't find endpoint region")
 		}
 		return region
+	case "ams3.digitaloceanspaces.com":
+		return "ams3"	
 	default:
 		regions := regionMatcher.FindStringSubmatch(s.Domain)
 		if len(regions) < 2 {
